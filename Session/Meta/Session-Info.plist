@@ -88,9 +88,9 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Session needs camera access to take pictures and scan QR codes.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Session's Screen Lock feature uses Face ID.</string>
+	<string>Session&apos;s Screen Lock feature uses Face ID.</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>com.loki-project.loki-messenger</string>
+	<string>com.chat.session</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Session needs access to your microphone for calls and to send to audio messages.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

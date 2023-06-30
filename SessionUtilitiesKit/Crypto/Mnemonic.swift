@@ -8,9 +8,9 @@ public enum Mnemonic {
         fileprivate let prefixLength: UInt
         
         public static let english = Language(filename: "english", prefixLength: 3)
-        public static let japanese = Language(filename: "japanese", prefixLength: 3)
-        public static let portuguese = Language(filename: "portuguese", prefixLength: 4)
-        public static let spanish = Language(filename: "spanish", prefixLength: 4)
+//        public static let japanese = Language(filename: "japanese", prefixLength: 3)
+//        public static let portuguese = Language(filename: "portuguese", prefixLength: 4)
+//        public static let spanish = Language(filename: "spanish", prefixLength: 4)
         
         private static var wordSetCache: [Language:[String]] = [:]
         private static var truncatedWordSetCache: [Language:[String]] = [:]

@@ -32,6 +32,7 @@ class SettingsViewModel: SessionTableViewModel<SettingsViewModel.NavButton, Sett
     
     public enum Item: Differentiable {
         case profileInfo
+        case addPath
         case path
         case privacy
         case notifications
@@ -260,6 +261,7 @@ class SettingsViewModel: SessionTableViewModel<SettingsViewModel.NavButton, Sett
                             title: "vc_path_title".localized(),
                             onTap: { [weak self] in self?.transitionToScreen(PathVC()) }
                         ),
+                        
                         SessionCell.Info(
                             id: .privacy,
                             leftAccessory: .icon(
@@ -286,6 +288,7 @@ class SettingsViewModel: SessionTableViewModel<SettingsViewModel.NavButton, Sett
                                 )
                             }
                         ),
+                        
                         SessionCell.Info(
                             id: .conversations,
                             leftAccessory: .icon(

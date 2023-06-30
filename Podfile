@@ -97,6 +97,7 @@ abstract_target 'GlobalDependencies' do
   target 'SessionUIKit' do
     pod 'GRDB.swift/SQLCipher'
     pod 'DifferenceKit'
+    pod 'SnapKit'
   end
 end
 

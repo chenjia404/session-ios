@@ -27,6 +27,7 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
     }
     
     public enum Section: SessionTableSection {
+        case seedSite
         case screenSecurity
         case readReceipts
         case typingIndicators
@@ -35,6 +36,7 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
         
         var title: String? {
             switch self {
+                case .seedSite: return "LocalSeedSite".localized()
                 case .screenSecurity: return "PRIVACY_SECTION_SCREEN_SECURITY".localized()
                 case .readReceipts: return "PRIVACY_SECTION_READ_RECEIPTS".localized()
                 case .typingIndicators: return "PRIVACY_SECTION_TYPING_INDICATORS".localized()
@@ -47,6 +49,7 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
     }
     
     public enum Item: Differentiable {
+        case seedSite
         case screenLock
         case screenshotNotifications
         case readReceipts
@@ -92,6 +95,22 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
     private lazy var _observableSettingsData: ObservableData = ValueObservation
         .trackingConstantRegion { db -> [SectionModel] in
             return [
+                SectionModel(
+                    model: .seedSite,
+                    elements: [
+                        SessionCell.Info(
+                            id: .seedSite,
+                            title: "LocalSeedSite".localized(),
+                            subtitle: "LocalGetLastSeed".localized(),
+                            onTap: { [weak self] in
+                                self?.transitionToScreen(InputModal.init(title: "LocalSeedSite".localized(), content: "LocalPleaseInputSeedSite".localized()).confirmAction({ value in
+                                    
+                                }), transitionType: .present)
+                                return
+                            }
+                        )
+                    ]
+                ),
                 SectionModel(
                     model: .screenSecurity,
                     elements: [
