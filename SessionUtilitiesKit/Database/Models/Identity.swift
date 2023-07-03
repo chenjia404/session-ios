@@ -129,7 +129,7 @@ public extension Identity {
         )
     }
     
-    static func fetchHexEncodedSeed(_ db: Database? = nil) -> String? {
+    static func fetchHexEncodedSeed(_ db: Database? = nil) -> Data? {
         guard let db: Database = db else {
             return Storage.shared.read { db in fetchHexEncodedSeed(db) }
         }
@@ -138,7 +138,7 @@ public extension Identity {
             return nil
         }
         
-        return data.toHexString()
+        return data
     }
 }
 

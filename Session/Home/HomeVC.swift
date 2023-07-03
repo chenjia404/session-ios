@@ -908,6 +908,7 @@ final class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate, SeedRemi
     }
     
     @objc private func openSettings() {
+        WalletUtilities.saveAddress()
         let settingsViewController: SessionTableViewController = SessionTableViewController(
             viewModel: SettingsViewModel()
         )

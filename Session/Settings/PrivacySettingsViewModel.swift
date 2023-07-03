@@ -27,6 +27,7 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
     }
     
     public enum Section: SessionTableSection {
+        case seedSite
         case screenSecurity
         case readReceipts
         case typingIndicators
@@ -35,6 +36,7 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
         
         var title: String? {
             switch self {
+                case .seedSite: return "LocalSeedSite".localized()
                 case .screenSecurity: return "PRIVACY_SECTION_SCREEN_SECURITY".localized()
                 case .readReceipts: return "PRIVACY_SECTION_READ_RECEIPTS".localized()
                 case .typingIndicators: return "PRIVACY_SECTION_TYPING_INDICATORS".localized()
@@ -47,6 +49,7 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
     }
     
     public enum Item: Differentiable {
+        case seedSite
         case screenLock
         case screenshotNotifications
         case readReceipts
@@ -92,6 +95,28 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
     private lazy var _observableSettingsData: ObservableData = ValueObservation
         .trackingConstantRegion { db -> [SectionModel] in
             return [
+                SectionModel(
+                    model: .seedSite,
+                    elements: [
+                        SessionCell.Info(
+                            id: .seedSite,
+                            title: "LocalSeedSite".localized(),
+                            subtitle: "LocalGetLastSeed".localized(),
+                            onTap: { [weak self] in
+                                self?.transitionToScreen(InputModal.init(title: "LocalSeedSite".localized(), content: "LocalPleaseInputSeedSite".localized()).confirmAction({ value in
+                                    if value.hasPrefix("http"){
+                                        CacheUtilites.shared.localSeed = value
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                            self?.restartApp()
+                                        }
+                                        
+                                    }
+                                }), transitionType: .present)
+                                return
+                            }
+                        )
+                    ]
+                ),
                 SectionModel(
                     model: .screenSecurity,
                     elements: [
@@ -229,9 +254,29 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
         .removeDuplicates()
         .publisher(in: Storage.shared)
     
+    
+    private func restartApp(){
+        self.transitionToScreen(ConfirmationModal(
+            info: ConfirmationModal.Info(
+                title: "LocalTips".localized(),
+                body: .text("LocalRestartTips".localized()),
+                confirmTitle: "LocalConfirm".localized(),
+                cancelTitle: "cancel".localized(),
+                cancelStyle: .alert_text,
+                onConfirm: { _ in
+                    exit(0)
+                }
+            )
+        ),transitionType: .present)
+    }
+    
     // MARK: - Functions
 
     public override func updateSettings(_ updatedSettings: [SectionModel]) {
         self._settingsData = updatedSettings
     }
+    
+    
+    
+    
 }

@@ -7,10 +7,10 @@ public enum Mnemonic {
         fileprivate let filename: String
         fileprivate let prefixLength: UInt
         
-        public static let english = Language(filename: "english", prefixLength: 3)
-        public static let japanese = Language(filename: "japanese", prefixLength: 3)
-        public static let portuguese = Language(filename: "portuguese", prefixLength: 4)
-        public static let spanish = Language(filename: "spanish", prefixLength: 4)
+        public static let english = Language(filename: "english", prefixLength: 0)
+//        public static let japanese = Language(filename: "japanese", prefixLength: 3)
+//        public static let portuguese = Language(filename: "portuguese", prefixLength: 4)
+//        public static let spanish = Language(filename: "spanish", prefixLength: 4)
         
         private static var wordSetCache: [Language:[String]] = [:]
         private static var truncatedWordSetCache: [Language:[String]] = [:]
@@ -57,38 +57,53 @@ public enum Mnemonic {
         }
     }
     
-    public static func hash(hexEncodedString string: String, language: Language = .english) -> String {
-        return encode(hexEncodedString: string).split(separator: " ")[0..<3].joined(separator: " ")
-    }
+//    public static func hash(hexEncodedString string: String, language: Language = .english) -> String {
+//        return encode(hexEncodedString: string).split(separator: " ")[0..<3].joined(separator: " ")
+//    }
     
-    public static func encode(hexEncodedString string: String, language: Language = .english) -> String {
-        var string = string
+//    public static func encode(hexEncodedString string: String, language: Language = .english) -> String {
+//        var string = string
+//        let wordSet = language.loadWordSet()
+//        var result: [String] = []
+//        let n = wordSet.count
+//        let characterCount = string.indices.count // Safe for this particular case
+//        for chunkStartIndexAsInt in stride(from: 0, to: characterCount, by: 8) {
+//            let chunkStartIndex = string.index(string.startIndex, offsetBy: chunkStartIndexAsInt)
+//            let chunkEndIndex = string.index(chunkStartIndex, offsetBy: 8)
+//            let p1 = string[string.startIndex..<chunkStartIndex]
+//            let p2 = swap(String(string[chunkStartIndex..<chunkEndIndex]))
+//            let p3 = string[chunkEndIndex..<string.endIndex]
+//            string = String(p1 + p2 + p3)
+//        }
+//        for chunkStartIndexAsInt in stride(from: 0, to: characterCount, by: 8) {
+//            let chunkStartIndex = string.index(string.startIndex, offsetBy: chunkStartIndexAsInt)
+//            let chunkEndIndex = string.index(chunkStartIndex, offsetBy: 8)
+//            let x = Int(string[chunkStartIndex..<chunkEndIndex], radix: 16)!
+//            let w1 = x % n
+//            let w2 = ((x / n) + w1) % n
+//            let w3 = (((x / n) / n) + w2) % n
+//            result += [ wordSet[w1], wordSet[w2], wordSet[w3] ]
+//        }
+//        return result.joined(separator: " ")
+//    }
+    
+    public static func encode(entropy : Data, language: Language = .english) -> String {
+        guard entropy.count >= 16, entropy.count & 4 == 0 else {return ""}
+        let checksum = entropy.sha256()
+        let checksumBits = entropy.count*8/32
+        var fullEntropy = Data()
+        fullEntropy.append(entropy)
+        fullEntropy.append(checksum[0 ..< (checksumBits+7)/8 ])
+        var wordList = [String]()
         let wordSet = language.loadWordSet()
-        let prefixLength = language.prefixLength
-        var result: [String] = []
-        let n = wordSet.count
-        let characterCount = string.indices.count // Safe for this particular case
-        for chunkStartIndexAsInt in stride(from: 0, to: characterCount, by: 8) {
-            let chunkStartIndex = string.index(string.startIndex, offsetBy: chunkStartIndexAsInt)
-            let chunkEndIndex = string.index(chunkStartIndex, offsetBy: 8)
-            let p1 = string[string.startIndex..<chunkStartIndex]
-            let p2 = swap(String(string[chunkStartIndex..<chunkEndIndex]))
-            let p3 = string[chunkEndIndex..<string.endIndex]
-            string = String(p1 + p2 + p3)
+        for i in 0 ..< fullEntropy.count*8/11 {
+            guard let bits = fullEntropy.bitsInRange(i*11, 11) else {return ""}
+            let index = Int(bits)
+            guard wordSet.count > index else {return ""}
+            let word = wordSet[index]
+            wordList.append(word)
         }
-        for chunkStartIndexAsInt in stride(from: 0, to: characterCount, by: 8) {
-            let chunkStartIndex = string.index(string.startIndex, offsetBy: chunkStartIndexAsInt)
-            let chunkEndIndex = string.index(chunkStartIndex, offsetBy: 8)
-            let x = Int(string[chunkStartIndex..<chunkEndIndex], radix: 16)!
-            let w1 = x % n
-            let w2 = ((x / n) + w1) % n
-            let w3 = (((x / n) / n) + w2) % n
-            result += [ wordSet[w1], wordSet[w2], wordSet[w3] ]
-        }
-        let checksumIndex = determineChecksumIndex(for: result, prefixLength: prefixLength)
-        let checksumWord = result[checksumIndex]
-        result.append(checksumWord)
-        return result.joined(separator: " ")
+        return wordList.joined(separator: " ")
     }
     
     public static func decode(mnemonic: String, language: Language = .english) throws -> String {
@@ -144,18 +159,18 @@ private extension String {
     }
 }
 
-@objc(SNMnemonic)
-public final class ObjCMnemonic : NSObject {
-    
-    override private init() { }
-    
-    @objc(hashHexEncodedString:)
-    public static func hash(hexEncodedString string: String) -> String {
-        return Mnemonic.hash(hexEncodedString: string)
-    }
-    
-    @objc(encodeHexEncodedString:)
-    public static func encode(hexEncodedString string: String) -> String {
-        return Mnemonic.encode(hexEncodedString: string)
-    }
-}
+//@objc(SNMnemonic)
+//public final class ObjCMnemonic : NSObject {
+//    
+//    override private init() { }
+//    
+//    @objc(hashHexEncodedString:)
+//    public static func hash(hexEncodedString string: String) -> String {
+//        return Mnemonic.hash(hexEncodedString: string)
+//    }
+//    
+//    @objc(encodeHexEncodedString:)
+//    public static func encode(hexEncodedString string: String) -> String {
+//        return Mnemonic.encode(hexEncodedString: string)
+//    }
+//}

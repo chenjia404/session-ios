@@ -26,12 +26,21 @@ class SettingsViewModel: SessionTableViewModel<SettingsViewModel.NavButton, Sett
     
     public enum Section: SessionTableSection {
         case profileInfo
+        case address
         case menus
         case footer
+        var title: String? {
+            return self == .address ? "LocalWalletAddress".localized() : nil
+        }
+        
+        var style: SessionTableSectionStyle {
+            return self == .address ? .title : .none
+        }
     }
     
     public enum Item: Differentiable {
         case profileInfo
+        case address
         case path
         case privacy
         case notifications
@@ -199,6 +208,7 @@ class SettingsViewModel: SessionTableViewModel<SettingsViewModel.NavButton, Sett
             let userPublicKey: String = getUserHexEncodedPublicKey(db)
             let profile: Profile = Profile.fetchOrCreateCurrentUser(db)
             
+
             return [
                 SectionModel(
                     model: .profileInfo,
@@ -240,6 +250,27 @@ class SettingsViewModel: SessionTableViewModel<SettingsViewModel.NavButton, Sett
                     ]
                 ),
                 SectionModel(
+                    model: .address,
+                    elements: [
+                        SessionCell.Info(
+                            id: .address,
+                            title: WalletUtilities.address,
+                            subtitle: "   ",
+                            rightAccessory: .customView(viewGenerator: {
+                                let result: UIView = UIView()
+                                let pathView: PathStatusView = PathStatusView(size: .large)
+                                result.addSubview(pathView)
+                                
+                                result.set(.width, to: IconSize.medium.size)
+                                result.set(.height, to: IconSize.medium.size)
+                                pathView.center(in: result)
+                                
+                                return result
+                            })
+                        )
+                    ]
+                ),
+                SectionModel(
                     model: .menus,
                     elements: [
                         SessionCell.Info(
@@ -260,6 +291,7 @@ class SettingsViewModel: SessionTableViewModel<SettingsViewModel.NavButton, Sett
                             title: "vc_path_title".localized(),
                             onTap: { [weak self] in self?.transitionToScreen(PathVC()) }
                         ),
+                        
                         SessionCell.Info(
                             id: .privacy,
                             leftAccessory: .icon(
@@ -286,6 +318,7 @@ class SettingsViewModel: SessionTableViewModel<SettingsViewModel.NavButton, Sett
                                 )
                             }
                         ),
+                        
                         SessionCell.Info(
                             id: .conversations,
                             leftAccessory: .icon(

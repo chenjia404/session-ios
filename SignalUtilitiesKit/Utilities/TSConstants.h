@@ -71,7 +71,7 @@ BOOL IsUsingProductionService(void);
 #define textSecureProfileAvatarFormAPI @"v1/profile/form/avatar"
 #define textSecure2FAAPI @"/v1/accounts/pin"
 
-#define SignalApplicationGroup @"group.com.loki-project.loki-messenger"
+#define SignalApplicationGroup @"group.com.chat.session"
 
 #endif
 

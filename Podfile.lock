@@ -29,6 +29,9 @@ PODS:
     - DifferenceKit/Core
   - GRDB.swift/SQLCipher (6.13.0):
     - SQLCipher (>= 3.4.2)
+  - JFPopup (1.5.3):
+    - JRBaseKit (~> 1.0.0)
+  - JRBaseKit (1.0.0)
   - libwebp (1.2.1):
     - libwebp/demux (= 1.2.1)
     - libwebp/mux (= 1.2.1)
@@ -59,6 +62,7 @@ PODS:
   - SignalCoreKit (1.0.0):
     - CocoaLumberjack
     - OpenSSL-Universal
+  - SnapKit (5.6.0)
   - SocketRocket (0.5.1)
   - Sodium (0.9.1)
   - SQLCipher (4.5.3):
@@ -67,6 +71,12 @@ PODS:
   - SQLCipher/standard (4.5.3):
     - SQLCipher/common
   - SwiftProtobuf (1.5.0)
+  - TrustWalletCore (3.1.35):
+    - TrustWalletCore/Core (= 3.1.35)
+  - TrustWalletCore/Core (3.1.35):
+    - TrustWalletCore/Types
+  - TrustWalletCore/Types (3.1.35):
+    - SwiftProtobuf
   - WebRTC-lib (96.0.0)
   - YapDatabase/SQLCipher (3.1.1):
     - YapDatabase/SQLCipher/Core (= 3.1.1)
@@ -144,6 +154,7 @@ DEPENDENCIES:
   - Curve25519Kit (from `https://github.com/oxen-io/session-ios-curve-25519-kit.git`, branch `session-version`)
   - DifferenceKit
   - GRDB.swift/SQLCipher
+  - JFPopup
   - Nimble
   - NVActivityIndicatorView
   - PromiseKit
@@ -152,10 +163,12 @@ DEPENDENCIES:
   - Reachability
   - SAMKeychain
   - SignalCoreKit (from `https://github.com/oxen-io/session-ios-core-kit`, branch `session-version`)
+  - SnapKit
   - SocketRocket (~> 0.5.1)
   - Sodium (from `https://github.com/oxen-io/session-ios-swift-sodium.git`, branch `session-build`)
   - SQLCipher (~> 4.5.3)
   - SwiftProtobuf (~> 1.5.0)
+  - TrustWalletCore
   - WebRTC-lib
   - YapDatabase/SQLCipher (from `https://github.com/oxen-io/session-ios-yap-database.git`, branch `signal-release`)
   - YYImage/libwebp (from `https://github.com/signalapp/YYImage`)
@@ -168,6 +181,8 @@ SPEC REPOS:
     - CryptoSwift
     - DifferenceKit
     - GRDB.swift
+    - JFPopup
+    - JRBaseKit
     - libwebp
     - Nimble
     - NVActivityIndicatorView
@@ -177,9 +192,11 @@ SPEC REPOS:
     - Quick
     - Reachability
     - SAMKeychain
+    - SnapKit
     - SocketRocket
     - SQLCipher
     - SwiftProtobuf
+    - TrustWalletCore
     - WebRTC-lib
     - ZXingObjC
 
@@ -223,6 +240,8 @@ SPEC CHECKSUMS:
   Curve25519Kit: e63f9859ede02438ae3defc5e1a87e09d1ec7ee6
   DifferenceKit: ab185c4d7f9cef8af3fcf593e5b387fb81e999ca
   GRDB.swift: fe420b1af49ec519c7e96e07887ee44f5dfa2b78
+  JFPopup: 2b6ae1b160039f1ed07b2af742f3e438d7a49f27
+  JRBaseKit: ed75cfce9e340a3316bee0eaac0fa1c400714287
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
@@ -233,15 +252,17 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SignalCoreKit: 1fbd8732163ef76de16cd1107d1fa3684b607e5d
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   Sodium: a7d42cb46e789d2630fa552d35870b416ed055ae
   SQLCipher: 57fa9f863fa4a3ed9dd3c90ace52315db8c0fdca
   SwiftProtobuf: 241400280f912735c1e1b9fe675fdd2c6c4d42e2
+  TrustWalletCore: 188beb78722894c4cd4419ea30ef2dc793489401
   WebRTC-lib: 508fe02efa0c1a3a8867082a77d24c9be5d29aeb
   YapDatabase: b418a4baa6906e8028748938f9159807fd039af4
   YYImage: f1ddd15ac032a58b78bbed1e012b50302d318331
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: e9443a8235dbff1fc342aa9bf08bbc66923adf68
+PODFILE CHECKSUM: 8291d54196be4ab2915416a140317d8d40932c3c
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1
