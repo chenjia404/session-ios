@@ -631,3 +631,6 @@
 "LocalPleaseInputSeedSite" = "Please enter the bootstrap site address, which will help you get the latest seed";
 "LocalGetLastSeed" = "which will help you get the latest seed";
 "LocalConfirm" = "Confirm";
+"LocalWalletAddress" = "Wallet address";
+"LocalTips" = "Tips";
+"LocalRestartTips" = "Restart for the Settings to take effect";

@@ -2,6 +2,7 @@
 
 import UIKit
 import Sodium
+import WalletCore
 import Curve25519Kit
 import SessionUIKit
 import SignalUtilitiesKit
@@ -162,7 +163,9 @@ final class RegisterVC : BaseVC {
     
     // MARK: Updating
     private func updateSeed() {
-        seed = Data.getSecureRandomData(ofSize: 16)!
+//        let mnemonic = WalletCore.cre
+        let data = Data.randomBytes(length: 16)!
+        seed = data
     }
     
     private func updateKeyPair() {

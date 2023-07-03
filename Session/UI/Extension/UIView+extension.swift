@@ -6,9 +6,9 @@ import UIKit
 
 //初始化
 extension UIView{
-    convenience init(_ color : UIColor) {
+    convenience init(_ color : ThemeValue) {
         self.init()
-        self.backgroundColor = color
+        self.themeBackgroundColor = color
     }
 }
 

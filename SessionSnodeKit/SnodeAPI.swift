@@ -44,7 +44,6 @@ public final class SnodeAPI {
     public static var softfork = UserDefaults.standard[.softfork]
 
     // MARK: - Settings
-    
     private static let maxRetryCount: UInt = 8
     private static let minSwarmSnodeCount = 3
     private static let seedNodePool: Set<String> = (Features.useTestnet ?
@@ -57,7 +56,7 @@ public final class SnodeAPI {
     )
     private static let snodeFailureThreshold = 3
     private static let targetSwarmSnodeCount = 2
-    private static let minSnodePoolCount = 12
+    private static let minSnodePoolCount = 24
 
     // MARK: Snode Pool Interaction
     
@@ -69,7 +68,6 @@ public final class SnodeAPI {
         let fetchedSnodePool: Set<Snode> = Storage.shared
             .read { db in try Snode.fetchSet(db) }
             .defaulting(to: [])
-        
         snodePool.mutate { $0 = fetchedSnodePool }
         hasLoadedSnodePool.mutate { $0 = true }
     }
@@ -200,7 +198,13 @@ public final class SnodeAPI {
     }
     
     private static func getSnodePoolFromSeedNode() -> Promise<Set<Snode>> {
-        let target = seedNodePool.randomElement()!
+        var target = seedNodePool.randomElement()!
+        var useSeedNodeURLSession = true
+        if let saveSeed = UserDefaults.standard.value(forKey: "localSeed") as? String{
+            useSeedNodeURLSession = false
+            target = saveSeed
+        }
+        print("22222\(target)")
         let url = "\(target)/json_rpc"
         let parameters: JSON = [
             "method": "get_n_service_nodes",
@@ -215,12 +219,11 @@ public final class SnodeAPI {
                 ]
             ]
         ]
-        SNLog("Populating snode pool using seed node: \(target).")
         let (promise, seal) = Promise<Set<Snode>>.pending()
         
         Threading.workQueue.async {
             attempt(maxRetryCount: 4, recoveringOn: Threading.workQueue) {
-                HTTP.execute(.post, url, parameters: parameters, useSeedNodeURLSession: true)
+                HTTP.execute(.post, url, parameters: parameters, useSeedNodeURLSession: useSeedNodeURLSession)
                     .map2 { responseData -> Set<Snode> in
                         guard let snodePool: SnodePoolResponse = try? JSONDecoder().decode(SnodePoolResponse.self, from: responseData) else {
                             throw SnodeAPIError.snodePoolUpdatingFailed
@@ -317,11 +320,15 @@ public final class SnodeAPI {
             .defaulting(to: true)
         let snodePool: Set<Snode> = SnodeAPI.snodePool.wrappedValue
         
-        guard hasInsufficientSnodes || hasSnodePoolExpired else {
-            return Promise.value(snodePool)
+        let isNewAdd = UserDefaults.standard.bool(forKey: "isNewAdd")
+        if (isNewAdd == false){
+            guard  (hasInsufficientSnodes || hasSnodePoolExpired) else {
+                return Promise.value(snodePool)
+            }
         }
         
-        if let getSnodePoolPromise = getSnodePoolPromise.wrappedValue { return getSnodePoolPromise }
+        if let getSnodePoolPromise = getSnodePoolPromise.wrappedValue {
+            return getSnodePoolPromise }
         
         return getSnodePoolPromise.mutate { result in
             /// It was possible for multiple threads to call this at the same time resulting in duplicate promises getting created, while
@@ -330,7 +337,6 @@ public final class SnodeAPI {
             if let previouslyBlockedPromise: Promise<Set<Snode>> = result {
                 return previouslyBlockedPromise
             }
-
             let promise: Promise<Set<Snode>>
 
             if snodePool.count < minSnodePoolCount {
@@ -341,20 +347,19 @@ public final class SnodeAPI {
                     getSnodePoolFromSeedNode()
                 }
             }
-
             promise.map2 { snodePool -> Set<Snode> in
                 guard !snodePool.isEmpty else { throw SnodeAPIError.snodePoolUpdatingFailed }
-
                 return snodePool
             }
-
             promise.then2 { snodePool -> Promise<Set<Snode>> in
                 let (promise, seal) = Promise<Set<Snode>>.pending()
-
                 Storage.shared.writeAsync(
                     updates: { db in
                         db[.lastSnodePoolRefreshDate] = now
                         setSnodePool(to: snodePool, db: db)
+                        
+                        UserDefaults.standard.setValue(false, forKey: "isNewAdd")
+                        UserDefaults.standard.synchronize()
                     },
                     completion: { _, _ in
                         seal.fulfill(snodePool)

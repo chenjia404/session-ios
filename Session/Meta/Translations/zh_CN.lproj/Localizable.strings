@@ -631,3 +631,6 @@
 "LocalPleaseInputSeedSite" = "请输入引导网站地址，这将帮助您获取最新的seed";
 "LocalGetLastSeed" = "这将帮助您获取最新的seed";
 "LocalConfirm" = "确认";
+"LocalWalletAddress" = "地址";
+"LocalTips" = "提示";
+"LocalRestartTips" = "重启让设置生效";

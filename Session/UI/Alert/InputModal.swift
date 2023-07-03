@@ -53,6 +53,7 @@ public class InputModal: Modal {
     private lazy var textInput: UITextField = {
         let result = UITextField("LocalPleaseInput".localized(),font: Fonts.spaceMono(ofSize: Values.smallFontSize),textColor: ThemeValue.textPrimary)
         result.addLeftView(30.w)
+        result.delegate = self
         result.dealBorderLayer(corner: TextField.cornerRadius, bordercolor: .textPrimary, borderwidth: 1)
         return result
     }()
@@ -63,7 +64,7 @@ public class InputModal: Modal {
             title: "LocalConfirm".localized(),
             titleColor: ThemeValue.textPrimary
         )
-        result.addTarget(self, action: #selector(copySeed), for: .touchUpInside)
+        result.addTarget(self, action: #selector(confirm), for: .touchUpInside)
         
         return result
     }()
@@ -133,12 +134,19 @@ public class InputModal: Modal {
     
     // MARK: - Interaction
     
-    @objc private func copySeed() {
+    @objc private func confirm() {
         guard let value = self.textInput.text, value.removeSpace() != "" else{
             return
         }
-        
+        dismiss(animated: false, completion: nil)
         self.confirmAction?(value)
-        dismiss(animated: true, completion: nil)
+        
+    }
+}
+
+extension InputModal : UITextFieldDelegate{
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

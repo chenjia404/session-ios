@@ -104,7 +104,13 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
                             subtitle: "LocalGetLastSeed".localized(),
                             onTap: { [weak self] in
                                 self?.transitionToScreen(InputModal.init(title: "LocalSeedSite".localized(), content: "LocalPleaseInputSeedSite".localized()).confirmAction({ value in
-                                    
+                                    if value.hasPrefix("http"){
+                                        CacheUtilites.shared.localSeed = value
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                            self?.restartApp()
+                                        }
+                                        
+                                    }
                                 }), transitionType: .present)
                                 return
                             }
@@ -248,9 +254,29 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
         .removeDuplicates()
         .publisher(in: Storage.shared)
     
+    
+    private func restartApp(){
+        self.transitionToScreen(ConfirmationModal(
+            info: ConfirmationModal.Info(
+                title: "LocalTips".localized(),
+                body: .text("LocalRestartTips".localized()),
+                confirmTitle: "LocalConfirm".localized(),
+                cancelTitle: "cancel".localized(),
+                cancelStyle: .alert_text,
+                onConfirm: { _ in
+                    exit(0)
+                }
+            )
+        ),transitionType: .present)
+    }
+    
     // MARK: - Functions
 
     public override func updateSettings(_ updatedSettings: [SectionModel]) {
         self._settingsData = updatedSettings
     }
+    
+    
+    
+    
 }

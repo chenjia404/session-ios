@@ -26,7 +26,8 @@ abstract_target 'GlobalDependencies' do
     pod 'YYImage/libwebp', git: 'https://github.com/signalapp/YYImage'
     pod 'ZXingObjC'
     pod 'DifferenceKit'
-    
+    pod 'TrustWalletCore'
+    pod 'JFPopup'
     target 'SessionTests' do
       inherit! :complete
       
@@ -60,6 +61,7 @@ abstract_target 'GlobalDependencies' do
         pod 'SwiftProtobuf', '~> 1.5.0'
         pod 'YYImage/libwebp', git: 'https://github.com/signalapp/YYImage'
         pod 'DifferenceKit'
+	
       end
       
       target 'SessionMessagingKit' do

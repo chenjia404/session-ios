@@ -25,8 +25,6 @@ class SessionHeaderView: UITableViewHeaderFooterView {
     private let titleLabel: UILabel = {
         let result: UILabel = UILabel()
         result.translatesAutoresizingMaskIntoConstraints = false
-        result.font = .systemFont(ofSize: Values.mediumFontSize)
-        result.themeTextColor = .textSecondary
         
         return result
     }()
@@ -66,6 +64,8 @@ class SessionHeaderView: UITableViewHeaderFooterView {
     public func update(
         style: SessionCell.Style = .rounded,
         title: String?,
+        textColor : ThemeValue = .textSecondary,
+        font : UIFont,
         hasSeparator: Bool
     ) {
         let titleIsEmpty: Bool = (title ?? "").isEmpty
@@ -78,8 +78,9 @@ class SessionHeaderView: UITableViewHeaderFooterView {
                 case .edgeToEdge, .roundedEdgeToEdge: return Values.largeSpacing
             }
         }()
-        
+        titleLabel.themeTextColor = textColor
         titleLabel.text = title
+        titleLabel.font = font
         titleLabel.isHidden = titleIsEmpty
         stackView.layoutMargins = UIEdgeInsets(
             top: (titleIsEmpty ? Values.verySmallSpacing : Values.mediumSpacing),

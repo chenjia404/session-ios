@@ -7,10 +7,6 @@ import UIKit
 let Screen_width = UIScreen.main.bounds.size.width
 let Screen_height = UIScreen.main.bounds.size.height
 
-//MARK: 通知
-let kNotifyRefreshDappHistory = NSNotification.Name(rawValue: "kNotifyRefreshDappHistory")
-
-
 
 /// 安全区底部高度
 var safeBottomH : CGFloat{

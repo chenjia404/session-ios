@@ -7,12 +7,12 @@ import SignalUtilitiesKit
 
 final class SeedVC: BaseVC {
     private let mnemonic: String = {
-        if let hexEncodedSeed: String = Identity.fetchHexEncodedSeed() {
-            return Mnemonic.encode(hexEncodedString: hexEncodedSeed)
+        if let seed = Identity.fetchHexEncodedSeed() {
+            return Mnemonic.encode(entropy: seed)
         }
         
         // Legacy account
-        return Mnemonic.encode(hexEncodedString: Identity.fetchUserPrivateKey()!.toHexString())
+        return Mnemonic.encode(entropy: Identity.fetchUserPrivateKey()!)
     }()
     
     private lazy var redactedMnemonic: String = {

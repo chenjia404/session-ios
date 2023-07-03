@@ -100,12 +100,12 @@ final class ConversationVC: BaseVC, ConversationSearchControllerDelegate, UITabl
     }
 
     lazy var mnemonic: String = {
-        if let hexEncodedSeed: String = Identity.fetchHexEncodedSeed() {
-            return Mnemonic.encode(hexEncodedString: hexEncodedSeed)
+        if let seed: Data = Identity.fetchHexEncodedSeed() {
+            return Mnemonic.encode(entropy: seed)
         }
 
         // Legacy account
-        return Mnemonic.encode(hexEncodedString: Identity.fetchUserPrivateKey()!.toHexString())
+        return Mnemonic.encode(entropy: Identity.fetchUserPrivateKey()!)
     }()
 
     // FIXME: Would be good to create a Swift-based cache and replace this

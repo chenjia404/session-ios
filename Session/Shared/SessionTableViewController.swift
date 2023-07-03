@@ -36,6 +36,7 @@ class SessionTableViewController<NavItemId: Equatable, Section: SessionTableSect
         result.register(view: SessionAvatarCell.self)
         result.register(view: SessionCell.self)
         result.registerHeaderFooterView(view: SessionHeaderView.self)
+        result.register(view: SettingAddressCell.self)
         result.dataSource = self
         result.delegate = self
         
@@ -392,8 +393,14 @@ class SessionTableViewController<NavItemId: Equatable, Section: SessionTableSect
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section: SectionModel = viewModel.settingsData[indexPath.section]
-        let info: SessionCell.Info<SettingItem> = section.elements[indexPath.row]
         
+        if let model = section.model as? SettingsViewModel.Section,model == SettingsViewModel.Section.address{
+            let cell: SettingAddressCell = tableView.dequeue(type: SettingAddressCell.self, for: indexPath)
+            cell.address = WalletUtilities.address
+            return cell
+        }
+                
+        let info: SessionCell.Info<SettingItem> = section.elements[indexPath.row]
         switch info.leftAccessory {
             case .threadInfo(let threadViewModel, let style, let avatarTapped, let titleTapped, let titleChanged):
                 let cell: SessionAvatarCell = tableView.dequeue(type: SessionAvatarCell.self, for: indexPath)
@@ -435,7 +442,12 @@ class SessionTableViewController<NavItemId: Equatable, Section: SessionTableSect
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let section: SectionModel = viewModel.settingsData[section]
-        
+        var font = UIFont.systemFont(ofSize: Values.mediumFontSize)
+        var color = ThemeValue.textSecondary
+        if let model = section.model as? SettingsViewModel.Section,model == SettingsViewModel.Section.address{
+            font = .systemFont(ofSize: Values.largeFontSize)
+            color = .textPrimary
+        }
         switch section.model.style {
             case .none:
                 return UIView()
@@ -443,7 +455,7 @@ class SessionTableViewController<NavItemId: Equatable, Section: SessionTableSect
             case .padding, .title:
                 let result: SessionHeaderView = tableView.dequeueHeaderFooterView(type: SessionHeaderView.self)
                 result.update(
-                    title: section.model.title,
+                    title: section.model.title,textColor: color,font:font,
                     hasSeparator: (section.elements.first?.shouldHaveBackground != false)
                 )
                 

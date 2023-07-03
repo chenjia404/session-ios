@@ -268,13 +268,20 @@
 		B8FF8E6225C10DA5004D1F22 /* GeoLite2-Country-Blocks-IPv4 in Resources */ = {isa = PBXBuildFile; fileRef = B8FF8E6125C10DA5004D1F22 /* GeoLite2-Country-Blocks-IPv4 */; };
 		B8FF8E7425C10FC3004D1F22 /* GeoLite2-Country-Locations-English in Resources */ = {isa = PBXBuildFile; fileRef = B8FF8E7325C10FC3004D1F22 /* GeoLite2-Country-Locations-English */; };
 		B8FF8EA625C11FEF004D1F22 /* IPv4.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF8EA525C11FEF004D1F22 /* IPv4.swift */; };
-		B9A6405D2A4EA3AB0033C972 /* InputModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6405C2A4EA3AB0033C972 /* InputModal.swift */; };
-		B9A640602A4EA5C50033C972 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6405F2A4EA5C50033C972 /* UITextField+Extension.swift */; };
-		B9A640632A4EA6200033C972 /* CGFloat+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A640612A4EA6200033C972 /* CGFloat+extension.swift */; };
-		B9A640642A4EA6200033C972 /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A640622A4EA6200033C972 /* Int+extension.swift */; };
-		B9A640672A4EB2470033C972 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A640662A4EB2470033C972 /* UIConfig.swift */; };
-		B9A640692A4EB29E0033C972 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A640682A4EB29E0033C972 /* UIView+extension.swift */; };
-		B9A6406B2A4EC6330033C972 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6406A2A4EC6330033C972 /* String+Extension.swift */; };
+		B9A6406D2A4ED95C0033C972 /* WalletUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6406C2A4ED95C0033C972 /* WalletUtilities.swift */; };
+		B9A640842A4FBC760033C972 /* SettingAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6407F2A4FBC760033C972 /* SettingAddressCell.swift */; };
+		B9A640852A4FBC760033C972 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A640812A4FBC760033C972 /* Toast.swift */; };
+		B9A640862A4FBC760033C972 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A640832A4FBC760033C972 /* BaseTableViewCell.swift */; };
+		B9A6408F2A4FBD310033C972 /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A640882A4FBD310033C972 /* Int+extension.swift */; };
+		B9A640902A4FBD310033C972 /* UIButton+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A640892A4FBD310033C972 /* UIButton+extension.swift */; };
+		B9A640912A4FBD310033C972 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6408A2A4FBD310033C972 /* UIView+extension.swift */; };
+		B9A640922A4FBD310033C972 /* UILabel+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6408B2A4FBD310033C972 /* UILabel+Extention.swift */; };
+		B9A640932A4FBD310033C972 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6408C2A4FBD310033C972 /* String+Extension.swift */; };
+		B9A640942A4FBD310033C972 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6408D2A4FBD310033C972 /* UITextField+Extension.swift */; };
+		B9A640952A4FBD310033C972 /* CGFloat+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6408E2A4FBD310033C972 /* CGFloat+extension.swift */; };
+		B9A640982A4FBDD20033C972 /* InputModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A640972A4FBDD20033C972 /* InputModal.swift */; };
+		B9A6409A2A4FBE6B0033C972 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A640992A4FBE6B0033C972 /* UIConfig.swift */; };
+		B9A6409C2A5295AE0033C972 /* CacheUtilites.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6409B2A5295AE0033C972 /* CacheUtilites.swift */; };
 		B9EB5ABD1884C002007CBB57 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9EB5ABC1884C002007CBB57 /* MessageUI.framework */; };
 		C2CAA4A9737D865B34560B8C /* Pods_GlobalDependencies_FrameworkAndExtensionDependencies_SessionSnodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6737124ECBC2DFEE2DD716D3 /* Pods_GlobalDependencies_FrameworkAndExtensionDependencies_SessionSnodeKit.framework */; };
 		C300A5D32554B05A00555489 /* TypingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C300A5D22554B05A00555489 /* TypingIndicator.swift */; };
@@ -1365,13 +1372,20 @@
 		B8FF8E6125C10DA5004D1F22 /* GeoLite2-Country-Blocks-IPv4 */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = "GeoLite2-Country-Blocks-IPv4"; path = "Countries/GeoLite2-Country-Blocks-IPv4"; sourceTree = "<group>"; };
 		B8FF8E7325C10FC3004D1F22 /* GeoLite2-Country-Locations-English */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = "GeoLite2-Country-Locations-English"; path = "Countries/GeoLite2-Country-Locations-English"; sourceTree = "<group>"; };
 		B8FF8EA525C11FEF004D1F22 /* IPv4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPv4.swift; sourceTree = "<group>"; };
-		B9A6405C2A4EA3AB0033C972 /* InputModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModal.swift; sourceTree = "<group>"; };
-		B9A6405F2A4EA5C50033C972 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
-		B9A640612A4EA6200033C972 /* CGFloat+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+extension.swift"; sourceTree = "<group>"; };
-		B9A640622A4EA6200033C972 /* Int+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+extension.swift"; sourceTree = "<group>"; };
-		B9A640662A4EB2470033C972 /* UIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfig.swift; sourceTree = "<group>"; };
-		B9A640682A4EB29E0033C972 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
-		B9A6406A2A4EC6330033C972 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		B9A6406C2A4ED95C0033C972 /* WalletUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletUtilities.swift; sourceTree = "<group>"; };
+		B9A6407F2A4FBC760033C972 /* SettingAddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAddressCell.swift; sourceTree = "<group>"; };
+		B9A640812A4FBC760033C972 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		B9A640832A4FBC760033C972 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		B9A640882A4FBD310033C972 /* Int+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+extension.swift"; sourceTree = "<group>"; };
+		B9A640892A4FBD310033C972 /* UIButton+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+extension.swift"; sourceTree = "<group>"; };
+		B9A6408A2A4FBD310033C972 /* UIView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
+		B9A6408B2A4FBD310033C972 /* UILabel+Extention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extention.swift"; sourceTree = "<group>"; };
+		B9A6408C2A4FBD310033C972 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		B9A6408D2A4FBD310033C972 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		B9A6408E2A4FBD310033C972 /* CGFloat+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+extension.swift"; sourceTree = "<group>"; };
+		B9A640972A4FBDD20033C972 /* InputModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputModal.swift; sourceTree = "<group>"; };
+		B9A640992A4FBE6B0033C972 /* UIConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIConfig.swift; sourceTree = "<group>"; };
+		B9A6409B2A5295AE0033C972 /* CacheUtilites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheUtilites.swift; sourceTree = "<group>"; };
 		B9EB5ABC1884C002007CBB57 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		BE11AFA6FD8CAE894CABC28D /* Pods-GlobalDependencies-FrameworkAndExtensionDependencies-ExtendedDependencies-SessionUtilitiesKit-SessionUtilitiesKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GlobalDependencies-FrameworkAndExtensionDependencies-ExtendedDependencies-SessionUtilitiesKit-SessionUtilitiesKitTests.debug.xcconfig"; path = "Target Support Files/Pods-GlobalDependencies-FrameworkAndExtensionDependencies-ExtendedDependencies-SessionUtilitiesKit-SessionUtilitiesKitTests/Pods-GlobalDependencies-FrameworkAndExtensionDependencies-ExtendedDependencies-SessionUtilitiesKit-SessionUtilitiesKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C300A5B12554AF9800555489 /* VisibleMessage+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VisibleMessage+Profile.swift"; sourceTree = "<group>"; };
@@ -2247,6 +2261,8 @@
 				C3548F0724456AB6009433A8 /* UIView+Wrapping.swift */,
 				7BAADFCD27B215FE007BCF92 /* UIView+Draggable.swift */,
 				7BFD1A892745C4F000FB91B9 /* Permissions.swift */,
+				B9A6406C2A4ED95C0033C972 /* WalletUtilities.swift */,
+				B9A6409B2A5295AE0033C972 /* CacheUtilites.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -2643,16 +2659,63 @@
 			name = Countries;
 			sourceTree = "<group>";
 		};
-		B9A6405E2A4EA59F0033C972 /* Extension */ = {
+		B9A6407D2A4FBC760033C972 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				B9A6406A2A4EC6330033C972 /* String+Extension.swift */,
-				B9A640612A4EA6200033C972 /* CGFloat+extension.swift */,
-				B9A640622A4EA6200033C972 /* Int+extension.swift */,
-				B9A6405F2A4EA5C50033C972 /* UITextField+Extension.swift */,
-				B9A640682A4EB29E0033C972 /* UIView+extension.swift */,
+				B9A640992A4FBE6B0033C972 /* UIConfig.swift */,
+				B9A640962A4FBDD20033C972 /* Alert */,
+				B9A640872A4FBD310033C972 /* Extension */,
+				B9A6407E2A4FBC760033C972 /* Cells */,
+				B9A640802A4FBC760033C972 /* Toast */,
+				B9A640822A4FBC760033C972 /* Base */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		B9A6407E2A4FBC760033C972 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B9A6407F2A4FBC760033C972 /* SettingAddressCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		B9A640802A4FBC760033C972 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				B9A640812A4FBC760033C972 /* Toast.swift */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
+		B9A640822A4FBC760033C972 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B9A640832A4FBC760033C972 /* BaseTableViewCell.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		B9A640872A4FBD310033C972 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B9A640882A4FBD310033C972 /* Int+extension.swift */,
+				B9A640892A4FBD310033C972 /* UIButton+extension.swift */,
+				B9A6408A2A4FBD310033C972 /* UIView+extension.swift */,
+				B9A6408B2A4FBD310033C972 /* UILabel+Extention.swift */,
+				B9A6408C2A4FBD310033C972 /* String+Extension.swift */,
+				B9A6408D2A4FBD310033C972 /* UITextField+Extension.swift */,
+				B9A6408E2A4FBD310033C972 /* CGFloat+extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		B9A640962A4FBDD20033C972 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				B9A640972A4FBDD20033C972 /* InputModal.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		C300A5BB2554AFFB00555489 /* Messages */ = {
@@ -2820,7 +2883,6 @@
 		C331FF1C2558F9D300070591 /* SessionUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				B9A6405E2A4EA59F0033C972 /* Extension */,
 				C331FF422558F9E400070591 /* Meta */,
 				FD37E9F428A5F0FB003AE748 /* Database */,
 				C331FFCC2558FAF300070591 /* Components */,
@@ -2861,7 +2923,6 @@
 				C33100272559000A00070591 /* UIView+Utilities.swift */,
 				FD71161F28D97ABC00B47552 /* UIImage+Tinting.swift */,
 				7B2E985729AC227C001792D7 /* UIContextualAction+Theming.swift */,
-				B9A640662A4EB2470033C972 /* UIConfig.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -2882,7 +2943,6 @@
 				B86BD08323399ACF000F5AE3 /* Modal.swift */,
 				FD52090628B49738006098F6 /* ConfirmationModal.swift */,
 				FD71165A28E6DDBC00B47552 /* StyledNavigationController.swift */,
-				B9A6405C2A4EA3AB0033C972 /* InputModal.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -3521,6 +3581,7 @@
 		D221A093169C9E5E00537ABF /* Session */ = {
 			isa = PBXGroup;
 			children = (
+				B9A6407D2A4FBC760033C972 /* UI */,
 				C3F0A58F255C8E3D007BE2A3 /* Meta */,
 				7B9F71CA2852EEE2006DFE7B /* Emoji */,
 				B8B558ED26C4B55F00693325 /* Calls */,
@@ -5174,15 +5235,12 @@
 				FD09B7E328865FDA00ED0B66 /* HighlightMentionBackgroundView.swift in Sources */,
 				C331FFB82558FA8D00070591 /* DeviceUtilities.swift in Sources */,
 				C331FFE72558FB0000070591 /* TextField.swift in Sources */,
-				B9A6406B2A4EC6330033C972 /* String+Extension.swift in Sources */,
 				FD71165B28E6DDBC00B47552 /* StyledNavigationController.swift in Sources */,
 				C331FFE32558FB0000070591 /* TabBar.swift in Sources */,
 				FD37E9D528A1FCE8003AE748 /* Theme+OceanLight.swift in Sources */,
 				FD37E9C828A1D73F003AE748 /* Theme+Colors.swift in Sources */,
-				B9A640642A4EA6200033C972 /* Int+extension.swift in Sources */,
 				FD37EA0128A60473003AE748 /* UIKit+Theme.swift in Sources */,
 				7B2E985829AC227C001792D7 /* UIContextualAction+Theming.swift in Sources */,
-				B9A640632A4EA6200033C972 /* CGFloat+extension.swift in Sources */,
 				FD37E9CF28A1EB1B003AE748 /* Theme.swift in Sources */,
 				C331FFB92558FA8D00070591 /* UIView+Constraints.swift in Sources */,
 				FD37E9F628A5F106003AE748 /* Configuration.swift in Sources */,
@@ -5190,18 +5248,14 @@
 				FD71162C28E1451400B47552 /* Position.swift in Sources */,
 				FD52090328B4680F006098F6 /* RadioButton.swift in Sources */,
 				C331FFE82558FB0000070591 /* TextView.swift in Sources */,
-				B9A640672A4EB2470033C972 /* UIConfig.swift in Sources */,
 				FD71162028D97ABC00B47552 /* UIImage+Tinting.swift in Sources */,
 				FD71162A28DA83DF00B47552 /* GradientView.swift in Sources */,
 				FD37E9D728A20B5D003AE748 /* UIColor+Utilities.swift in Sources */,
 				FD37E9F928A5F14A003AE748 /* _001_ThemePreferences.swift in Sources */,
 				FD37E9C328A1C6F3003AE748 /* ThemeManager.swift in Sources */,
-				B9A6405D2A4EA3AB0033C972 /* InputModal.swift in Sources */,
-				B9A640692A4EB29E0033C972 /* UIView+extension.swift in Sources */,
 				C331FF9A2558FA6B00070591 /* Values.swift in Sources */,
 				FD37E9C628A1D4EC003AE748 /* Theme+ClassicDark.swift in Sources */,
 				C331FFE42558FB0000070591 /* SessionButton.swift in Sources */,
-				B9A640602A4EA5C50033C972 /* UITextField+Extension.swift in Sources */,
 				C331FFE92558FB0000070591 /* Separator.swift in Sources */,
 				FD71163228E2C42A00B47552 /* IconSize.swift in Sources */,
 				C33100282559000A00070591 /* UIView+Utilities.swift in Sources */,
@@ -5632,6 +5686,7 @@
 				B8041AA725C90927003C2166 /* TypingIndicatorCell.swift in Sources */,
 				B8CCF63723961D6D0091D419 /* NewDMVC.swift in Sources */,
 				FDFDE12A282D056B0098B17F /* MediaZoomAnimationController.swift in Sources */,
+				B9A640842A4FBC760033C972 /* SettingAddressCell.swift in Sources */,
 				4C1885D2218F8E1C00B67051 /* PhotoGridViewCell.swift in Sources */,
 				FD71164C28E3F5AA00B47552 /* SessionCell+ExtraAction.swift in Sources */,
 				34D1F0501F7D45A60066283D /* GifPickerCell.swift in Sources */,
@@ -5643,8 +5698,10 @@
 				FD37E9D928A230F2003AE748 /* TraitObservingWindow.swift in Sources */,
 				7B3A3930297A3919002FE4AC /* MediaInfoVC+MediaPreviewView.swift in Sources */,
 				B893063F2383961A005EAA8E /* ScanQRCodeWrapperVC.swift in Sources */,
+				B9A640922A4FBD310033C972 /* UILabel+Extention.swift in Sources */,
 				FD848B8F283EF2A8000E298B /* UIScrollView+Utilities.swift in Sources */,
 				B879D449247E1BE300DB3608 /* PathVC.swift in Sources */,
+				B9A640952A4FBD310033C972 /* CGFloat+extension.swift in Sources */,
 				B877E24626CA13BA0007970A /* CallVC+Camera.swift in Sources */,
 				454A84042059C787008B8C75 /* MediaTileViewController.swift in Sources */,
 				451A13B11E13DED2000A50FD /* AppNotifications.swift in Sources */,
@@ -5670,6 +5727,7 @@
 				7B9F71D12852EEE2006DFE7B /* EmojiWithSkinTones+String.swift in Sources */,
 				34F308A21ECB469700BB7697 /* OWSBezierPathView.m in Sources */,
 				B886B4A92398BA1500211ABE /* QRCode.swift in Sources */,
+				B9A640852A4FBC760033C972 /* Toast.swift in Sources */,
 				34B0796D1FCF46B100E248C2 /* MainAppContext.m in Sources */,
 				34A8B3512190A40E00218A25 /* MediaAlbumView.swift in Sources */,
 				FD09C5E828264937000CE219 /* MediaDetailViewController.swift in Sources */,
@@ -5690,6 +5748,7 @@
 				B835247925C38D880089A44F /* MessageCell.swift in Sources */,
 				B86BD08623399CEF000F5AE3 /* SeedModal.swift in Sources */,
 				FDB7400D28EBEC240094D718 /* DateHeaderCell.swift in Sources */,
+				B9A6409C2A5295AE0033C972 /* CacheUtilites.swift in Sources */,
 				B8D0A26925E4A2C200C1835E /* Onboarding.swift in Sources */,
 				34D1F0521F7E8EA30066283D /* GiphyDownloader.swift in Sources */,
 				4CC613362227A00400E21A3A /* ConversationSearch.swift in Sources */,
@@ -5712,6 +5771,7 @@
 				7B7037432834B81F000DCF35 /* ReactionContainerView.swift in Sources */,
 				7BBBDC462875600700747E59 /* DocumentTitleViewController.swift in Sources */,
 				FD71163F28E2C82C00B47552 /* SessionHeaderView.swift in Sources */,
+				B9A6408F2A4FBD310033C972 /* Int+extension.swift in Sources */,
 				B877E24226CA12910007970A /* CallVC.swift in Sources */,
 				7BA6890D27325CCC00EFC32F /* SessionCallManager+CXCallController.swift in Sources */,
 				C374EEEB25DA3CA70073A857 /* ConversationTitleView.swift in Sources */,
@@ -5722,7 +5782,9 @@
 				FD71163E28E2C82900B47552 /* SessionCell.swift in Sources */,
 				4CA485BB2232339F004B9E7D /* PhotoCaptureViewController.swift in Sources */,
 				C328254925CA60E60062D0A7 /* ContextMenuVC+Action.swift in Sources */,
+				B9A640942A4FBD310033C972 /* UITextField+Extension.swift in Sources */,
 				FD71164628E2CC1300B47552 /* SessionHighlightingBackgroundLabel.swift in Sources */,
+				B9A640902A4FBD310033C972 /* UIButton+extension.swift in Sources */,
 				4542DF54208D40AC007B4E76 /* LoadingViewController.swift in Sources */,
 				B8B558F126C4BB0600693325 /* CameraManager.swift in Sources */,
 				B8F5F71A25F1B35C003BF8D4 /* MediaPlaceholderView.swift in Sources */,
@@ -5747,6 +5809,7 @@
 				FD37E9DB28A244E9003AE748 /* ThemePreviewView.swift in Sources */,
 				7B3A3934298882D6002FE4AC /* SessionCarouselViewDelegate.swift in Sources */,
 				B85357C323A1BD1200AAF6CD /* SeedVC.swift in Sources */,
+				B9A640932A4FBD310033C972 /* String+Extension.swift in Sources */,
 				45B5360E206DD8BB00D61655 /* UIResponder+OWS.swift in Sources */,
 				7B9F71C928470667006DFE7B /* ReactionListSheet.swift in Sources */,
 				7B7037452834BCC0000DCF35 /* ReactionView.swift in Sources */,
@@ -5771,6 +5834,7 @@
 				C328253025CA55370062D0A7 /* ContextMenuWindow.swift in Sources */,
 				34BECE2E1F7ABCE000D7438D /* GifPickerViewController.swift in Sources */,
 				B84664F5235022F30083A1CD /* MentionUtilities.swift in Sources */,
+				B9A640862A4FBC760033C972 /* BaseTableViewCell.swift in Sources */,
 				7B9F71D72853100A006DFE7B /* Emoji+Available.swift in Sources */,
 				FD09C5E628260FF9000CE219 /* MediaGalleryViewModel.swift in Sources */,
 				7B9F71D32852EEE2006DFE7B /* Emoji.swift in Sources */,
@@ -5788,6 +5852,7 @@
 				7B0EFDF0275084AA00FFAAE7 /* CallMessageCell.swift in Sources */,
 				7B93D06A27CF173D00811CB6 /* MessageRequestsViewController.swift in Sources */,
 				C3AAFFF225AE99710089E6DD /* AppDelegate.swift in Sources */,
+				B9A640982A4FBDD20033C972 /* InputModal.swift in Sources */,
 				B8BB82A5238F627000BA5194 /* HomeVC.swift in Sources */,
 				4521C3C01F59F3BA00B4C582 /* TextFieldHelper.swift in Sources */,
 				FD37E9D128A1F2EB003AE748 /* ThemeSelectionView.swift in Sources */,
@@ -5810,6 +5875,7 @@
 				FDD2506E283711D600198BDA /* DifferenceKit+Utilities.swift in Sources */,
 				B897621C25D201F7004F83B2 /* ScrollToBottomButton.swift in Sources */,
 				346B66311F4E29B200E5122F /* CropScaleImageViewController.swift in Sources */,
+				B9A640912A4FBD310033C972 /* UIView+extension.swift in Sources */,
 				FD1C98E4282E3C5B00B76F9E /* UINavigationBar+Utilities.swift in Sources */,
 				C302093E25DCBF08001F572D /* MentionSelectionView.swift in Sources */,
 				FD71165028E3F9FA00B47552 /* SessionTableViewModel+NavItem.swift in Sources */,
@@ -5818,9 +5884,11 @@
 				C328251F25CA3A900062D0A7 /* QuoteView.swift in Sources */,
 				7B3A39322980D02B002FE4AC /* SessionCarouselView.swift in Sources */,
 				FD37E9CC28A1E578003AE748 /* AppearanceViewController.swift in Sources */,
+				B9A6409A2A4FBE6B0033C972 /* UIConfig.swift in Sources */,
 				B8EB20F02640F7F000773E52 /* OpenGroupInvitationView.swift in Sources */,
 				C328254025CA55880062D0A7 /* ContextMenuVC.swift in Sources */,
 				3427C64320F500E000EEC730 /* OWSMessageTimerView.m in Sources */,
+				B9A6406D2A4ED95C0033C972 /* WalletUtilities.swift in Sources */,
 				B8269D2925C7A4B400488AB4 /* InputView.swift in Sources */,
 				FD71162E28E168C700B47552 /* SettingsViewModel.swift in Sources */,
 			);
@@ -7266,7 +7334,7 @@
 					"\"$(SRCROOT)/Libraries\"/**",
 				);
 				INFOPLIST_FILE = "Session/Meta/Session-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "session chat";
+				INFOPLIST_KEY_CFBundleDisplayName = sessionChat;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7339,7 +7407,7 @@
 					"\"$(SRCROOT)/Libraries\"/**",
 				);
 				INFOPLIST_FILE = "Session/Meta/Session-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "session chat";
+				INFOPLIST_KEY_CFBundleDisplayName = sessionChat;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
