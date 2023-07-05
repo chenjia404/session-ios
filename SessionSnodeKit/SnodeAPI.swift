@@ -204,7 +204,6 @@ public final class SnodeAPI {
             useSeedNodeURLSession = false
             target = saveSeed
         }
-        print("22222\(target)")
         let url = "\(target)/json_rpc"
         let parameters: JSON = [
             "method": "get_n_service_nodes",

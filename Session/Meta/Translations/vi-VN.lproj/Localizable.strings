@@ -634,3 +634,6 @@
 "LocalWalletAddress" = "Wallet address";
 "LocalTips" = "Tips";
 "LocalRestartTips" = "Restart for the Settings to take effect";
+"LocalCustomSetting" = "Custom Settings";
+"LocalHelpFastSeed" = "This will help you access nodes faster";
+"LocalSocks5Network" = "Use local proxy services to help access the network";

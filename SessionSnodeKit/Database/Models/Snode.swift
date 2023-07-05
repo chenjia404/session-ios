@@ -29,7 +29,6 @@ public struct Snode: Codable, FetchableRecord, PersistableRecord, TableRecord, C
         guard let range = address.range(of: "https://"), range.lowerBound == address.startIndex else {
             return address
         }
-        
         return String(address[range.upperBound..<address.endIndex])
     }
     

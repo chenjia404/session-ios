@@ -27,7 +27,7 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
     }
     
     public enum Section: SessionTableSection {
-        case seedSite
+        case customer
         case screenSecurity
         case readReceipts
         case typingIndicators
@@ -36,7 +36,7 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
         
         var title: String? {
             switch self {
-                case .seedSite: return "LocalSeedSite".localized()
+                case .customer: return "LocalCustomSetting".localized()
                 case .screenSecurity: return "PRIVACY_SECTION_SCREEN_SECURITY".localized()
                 case .readReceipts: return "PRIVACY_SECTION_READ_RECEIPTS".localized()
                 case .typingIndicators: return "PRIVACY_SECTION_TYPING_INDICATORS".localized()
@@ -50,6 +50,8 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
     
     public enum Item: Differentiable {
         case seedSite
+        case httpProxy
+        case socks5Proxy
         case screenLock
         case screenshotNotifications
         case readReceipts
@@ -96,7 +98,7 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
         .trackingConstantRegion { db -> [SectionModel] in
             return [
                 SectionModel(
-                    model: .seedSite,
+                    model: .customer,
                     elements: [
                         SessionCell.Info(
                             id: .seedSite,
@@ -112,6 +114,34 @@ class PrivacySettingsViewModel: SessionTableViewModel<PrivacySettingsViewModel.N
                                         
                                     }
                                 }), transitionType: .present)
+                                return
+                            }
+                        ),
+                        SessionCell.Info(
+                            id: .httpProxy,
+                            title: "HttpProxy",
+                            subtitle: CacheUtilites.shared.localHttpsProxy.count > 10 ? CacheUtilites.shared.localHttpsProxy : "LocalHelpFastSeed".localized(),
+                            rightAccessory: .toggle(.settingBool(key: .isHttpsProxy)),
+                            inputInfo: InputModelInfo.init(title: "HttpProxy", content: "LocalHelpFastSeed".localized(),inputText: CacheUtilites.shared.localHttpsProxy),
+                            onTap: { [weak self] in
+                                CacheUtilites.shared.useHttpsProxy = !Storage.shared[Setting.BoolKey.isHttpsProxy]
+                                Storage.shared.write { db in
+                                    db[.isHttpsProxy] = !db[.isHttpsProxy]
+                                }
+                                return
+                            }
+                        ),
+                        SessionCell.Info(
+                            id: .socks5Proxy,
+                            title: "Socks5Proxy",
+                            subtitle: CacheUtilites.shared.localSocks5Proxy.count > 10 ? CacheUtilites.shared.localSocks5Proxy : "LocalSocks5Network".localized(),
+                            rightAccessory: .toggle(.settingBool(key: .isSocks5Proxy)),
+                            inputInfo: InputModelInfo.init(title: "HttpProxy", content: "LocalHelpFastSeed".localized(),inputText: CacheUtilites.shared.localSocks5Proxy,placeholder: "127.0.0.1:7890"),
+                            onTap: { [weak self] in
+                                CacheUtilites.shared.useHttpsProxy = !Storage.shared[Setting.BoolKey.isSocks5Proxy]
+                                Storage.shared.write { db in
+                                    db[.isSocks5Proxy] = !db[.isSocks5Proxy]
+                                }
                                 return
                             }
                         )

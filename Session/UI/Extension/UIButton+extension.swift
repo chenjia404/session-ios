@@ -7,9 +7,6 @@
 
 import UIKit
 extension UIButton{
-    
-    
-    
     convenience init(title : String? = nil,selectTitle : String? = nil,font : UIFont? = nil , color : ThemeValue? = nil , selectColor : ThemeValue? = nil , image : UIImage? = nil , selectImage : UIImage? = nil,backgroundColor : ThemeValue? = nil, backgroundImage: UIImage? = nil, selectBackgroundImage: UIImage? = nil) {
         self.init()
         self.setTitle(title, for: UIControl.State.normal)

@@ -535,6 +535,23 @@ class SessionTableViewController<NavItemId: Equatable, Section: SessionTableSect
             }
         }
         
+        
+        if let inputInfo = info.inputInfo{
+            if Storage.shared[Setting.BoolKey.isHttpsProxy] {
+                performAction()
+                return
+            }
+            
+            let inputView = InputModal(targetView: tappedView,info: inputInfo).confirmAction { value in
+                if value.hasPrefix("http"){
+                    CacheUtilites.shared.localHttpsProxy = value
+                    performAction()
+                }
+            }
+            present(inputView, animated: true, completion: nil)
+            return
+        }
+        
         guard
             let confirmationInfo: ConfirmationModal.Info = info.confirmationInfo,
             confirmationInfo.showCondition.shouldShow(for: info.currentBoolValue)
@@ -542,7 +559,6 @@ class SessionTableViewController<NavItemId: Equatable, Section: SessionTableSect
             performAction()
             return
         }
-
         // Show a confirmation modal before continuing
         let confirmationModal: ConfirmationModal = ConfirmationModal(
             targetView: tappedView,

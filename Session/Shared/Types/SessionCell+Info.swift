@@ -21,6 +21,7 @@ extension SessionCell {
         let leftAccessoryAccessibilityLabel: String?
         let rightAccessoryAccessibilityLabel: String?
         let confirmationInfo: ConfirmationModal.Info?
+        let inputInfo: InputModelInfo?
         let onTap: ((UIView?) -> Void)?
         
         var currentBoolValue: Bool {
@@ -48,6 +49,7 @@ extension SessionCell {
             leftAccessoryAccessibilityLabel: String? = nil,
             rightAccessoryAccessibilityLabel: String? = nil,
             confirmationInfo: ConfirmationModal.Info? = nil,
+            inputInfo: InputModelInfo? = nil,
             onTap: ((UIView?) -> Void)?
         ) {
             self.id = id
@@ -65,6 +67,7 @@ extension SessionCell {
             self.leftAccessoryAccessibilityLabel = leftAccessoryAccessibilityLabel
             self.rightAccessoryAccessibilityLabel = rightAccessoryAccessibilityLabel
             self.confirmationInfo = confirmationInfo
+            self.inputInfo = inputInfo
             self.onTap = onTap
         }
         
@@ -84,6 +87,7 @@ extension SessionCell {
             leftAccessoryAccessibilityLabel: String? = nil,
             rightAccessoryAccessibilityLabel: String? = nil,
             confirmationInfo: ConfirmationModal.Info? = nil,
+            inputInfo: InputModelInfo? = nil,
             onTap: (() -> Void)? = nil
         ) {
             self.id = id
@@ -101,6 +105,7 @@ extension SessionCell {
             self.leftAccessoryAccessibilityLabel = leftAccessoryAccessibilityLabel
             self.rightAccessoryAccessibilityLabel = rightAccessoryAccessibilityLabel
             self.confirmationInfo = confirmationInfo
+            self.inputInfo = inputInfo
             self.onTap = (onTap != nil ? { _ in onTap?() } : nil)
         }
         

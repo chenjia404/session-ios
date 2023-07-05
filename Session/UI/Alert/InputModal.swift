@@ -7,13 +7,18 @@ public class InputModal: Modal {
     var confirmAction : ((String)->())?
     
     
-    public init(targetView: UIView? = nil, title: String,content: String) {
+    public init(targetView: UIView? = nil,title: String,content: String,textValue : String? = "") {
         super.init(targetView: targetView, dismissType: .recursive, afterClosed: nil)
-        
         self.modalPresentationStyle = .overFullScreen
         self.modalTransitionStyle = .crossDissolve
         self.titleLabel.text = title
         self.explanationLabel.text = content
+        self.textInput.text = textValue
+    }
+    
+    convenience init(targetView: UIView? = nil,info : InputModelInfo) {
+        self.init(targetView: targetView, title: info.title,content: info.content,textValue: info.inputText)
+        self.textInput.placeholder = info.placeholder
     }
     
     @discardableResult
@@ -28,7 +33,7 @@ public class InputModal: Modal {
     
     // MARK: - Components
     
-    private let titleLabel: UILabel = {
+    public let titleLabel: UILabel = {
         let result: UILabel = UILabel()
         result.font = .boldSystemFont(ofSize: Values.mediumFontSize)
         result.themeTextColor = .textPrimary
@@ -50,7 +55,7 @@ public class InputModal: Modal {
         return result
     }()
     
-    private lazy var textInput: UITextField = {
+    public lazy var textInput: UITextField = {
         let result = UITextField("LocalPleaseInput".localized(),font: Fonts.spaceMono(ofSize: Values.smallFontSize),textColor: ThemeValue.textPrimary)
         result.addLeftView(30.w)
         result.delegate = self
@@ -148,5 +153,19 @@ extension InputModal : UITextFieldDelegate{
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+
+struct InputModelInfo{
+    var title : String
+    var content : String
+    var inputText : String
+    var placeholder : String
+    init(title: String, content: String, inputText: String = "",placeholder:String = "LocalPleaseInput".localized()) {
+        self.title = title
+        self.content = content
+        self.inputText = inputText
+        self.placeholder = placeholder
     }
 }

@@ -381,6 +381,7 @@ public enum OnionRequestAPI: OnionRequestAPIType {
         }
         
         /// **Note:** Currently the service nodes only support V3 Onion Requests
+        
         return sendOnionRequest(with: payload, to: OnionRequestAPIDestination.snode(snode), version: .v3, timeout: timeout)
             .map { _, maybeData in
                 guard let data: Data = maybeData else { throw HTTP.Error.invalidResponse }
@@ -431,7 +432,8 @@ public enum OnionRequestAPI: OnionRequestAPIType {
             buildOnion(around: payload, targetedAt: destination)
                 .done2 { intermediate in
                     guardSnode = intermediate.guardSnode
-                    let url = "\(guardSnode!.address):\(guardSnode!.port)/onion_req/v2"
+                    var url = "\(guardSnode!.address):\(guardSnode!.port)/onion_req/v2"
+                    
                     let finalEncryptionResult = intermediate.finalEncryptionResult
                     let onion = finalEncryptionResult.ciphertext
                     if case OnionRequestAPIDestination.server = destination, Double(onion.count) > 0.75 * Double(maxRequestSize) {
@@ -447,6 +449,9 @@ public enum OnionRequestAPI: OnionRequestAPIType {
                         return seal.reject(error)
                     }
                     let destinationSymmetricKey = intermediate.destinationSymmetricKey
+                    
+                    
+                    
                     
                     HTTP.execute(.post, url, body: body, timeout: timeout)
                         .done2 { responseData in

@@ -1,10 +1,9 @@
 import Foundation
 import PromiseKit
-
 public enum HTTP {
-    private static let seedNodeURLSession = URLSession(configuration: .ephemeral, delegate: seedNodeURLSessionDelegate, delegateQueue: nil)
+    private static let seedNodeURLSession = URLSession(configuration: ContentProxy.sessionCustomConfiguration(), delegate: seedNodeURLSessionDelegate, delegateQueue: nil)
     private static let seedNodeURLSessionDelegate = SeedNodeURLSessionDelegateImplementation()
-    private static let snodeURLSession = URLSession(configuration: .ephemeral, delegate: snodeURLSessionDelegate, delegateQueue: nil)
+    private static let snodeURLSession = URLSession(configuration: ContentProxy.sessionCustomConfiguration(), delegate: snodeURLSessionDelegate, delegateQueue: nil)
     private static let snodeURLSessionDelegate = SnodeURLSessionDelegateImplementation()
 
     // MARK: Certificates
@@ -41,7 +40,7 @@ public enum HTTP {
                 return completionHandler(.cancelAuthenticationChallenge, nil)
             }
             // Mark the seed node certificates as trusted
-            let certificates = [ storageSeed1Cert, storageSeed2Cert, storageSeed3Cert ]
+            let certificates = [ storageSeed1Cert, storageSeed2Cert, storageSeed3Cert]
             guard SecTrustSetAnchorCertificates(trust, certificates as CFArray) == errSecSuccess else {
                 SNLog("Failed to set seed node certificates.")
                 return completionHandler(.cancelAuthenticationChallenge, nil)
@@ -155,11 +154,24 @@ public enum HTTP {
     }
 
     public static func execute(_ verb: Verb, _ url: String, body: Data?, timeout: TimeInterval = HTTP.timeout, useSeedNodeURLSession: Bool = false) -> Promise<Data> {
+        
+        var url = url
+        var o_host = ""
+        
+        let localUseHttpsProxy = UserDefaults.standard.bool(forKey: "localUseHttpsProxy")
+        print(localUseHttpsProxy)
+        if localUseHttpsProxy, let customUrl = UserDefaults.standard.string(forKey: "localHttpsProxy"),customUrl.count > 10{
+            var host = url.components(separatedBy: "//").last?.components(separatedBy: "/") ?? []
+            o_host = host.first ?? ""
+            host[0] = customUrl
+            url = host.joined(separator: "/")
+        }
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = verb.rawValue
         request.httpBody = body
         request.timeoutInterval = timeout
         request.allHTTPHeaderFields?.removeValue(forKey: "User-Agent")
+        request.setValue(o_host, forHTTPHeaderField: "o-host")
         request.setValue("WhatsApp", forHTTPHeaderField: "User-Agent") // Set a fake value
         request.setValue("en-us", forHTTPHeaderField: "Accept-Language") // Set a fake value
         let (promise, seal) = Promise<Data>.pending()
