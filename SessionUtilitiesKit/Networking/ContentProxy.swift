@@ -30,19 +30,19 @@ public class ContentProxy: NSObject {
     @objc
     public class func sessionCustomConfiguration() -> URLSessionConfiguration {
         let configuration = URLSessionConfiguration.ephemeral
-        if UserDefaults.standard.bool(forKey: "kLocalUseSocks5Proxy"), var socks5Proxy = UserDefaults.standard.string(forKey: "localSocks5Proxy"),socks5Proxy.count > 10 {
+        
+        let localUseSocks5Proxy = UserDefaults.standard.bool(forKey: "localUseSocks5Proxy")
+        if localUseSocks5Proxy, let socks5Proxy = UserDefaults.standard.string(forKey: "localSocks5Proxy"),socks5Proxy.count > 10 {
             let proxys = socks5Proxy.components(separatedBy: ":")
             let proxyHost = proxys.first ?? ""
             let proxyPort = proxys.last ?? ""
+            
             configuration.connectionProxyDictionary = [
-                "HTTPEnable": 1,
-                "HTTPProxy": proxyHost,
-                "HTTPPort": proxyPort,
-                "HTTPSEnable": 1,
-                "HTTPSProxy": proxyHost,
-                "HTTPSPort": proxyPort
+                kCFStreamPropertySOCKSProxyPort: proxyPort,
+                kCFStreamPropertySOCKSProxyHost: proxyHost
             ]
         }
+        
         return configuration
     }
     

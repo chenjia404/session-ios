@@ -1,9 +1,7 @@
 import Foundation
 import PromiseKit
 public enum HTTP {
-    private static let seedNodeURLSession = URLSession(configuration: ContentProxy.sessionCustomConfiguration(), delegate: seedNodeURLSessionDelegate, delegateQueue: nil)
     private static let seedNodeURLSessionDelegate = SeedNodeURLSessionDelegateImplementation()
-    private static let snodeURLSession = URLSession(configuration: ContentProxy.sessionCustomConfiguration(), delegate: snodeURLSessionDelegate, delegateQueue: nil)
     private static let snodeURLSessionDelegate = SnodeURLSessionDelegateImplementation()
 
     // MARK: Certificates
@@ -159,7 +157,6 @@ public enum HTTP {
         var o_host = ""
         
         let localUseHttpsProxy = UserDefaults.standard.bool(forKey: "localUseHttpsProxy")
-        print(localUseHttpsProxy)
         if localUseHttpsProxy, let customUrl = UserDefaults.standard.string(forKey: "localHttpsProxy"),customUrl.count > 10{
             var host = url.components(separatedBy: "//").last?.components(separatedBy: "/") ?? []
             o_host = host.first ?? ""
@@ -174,8 +171,10 @@ public enum HTTP {
         request.setValue(o_host, forHTTPHeaderField: "o-host")
         request.setValue("WhatsApp", forHTTPHeaderField: "User-Agent") // Set a fake value
         request.setValue("en-us", forHTTPHeaderField: "Accept-Language") // Set a fake value
+        
+        
         let (promise, seal) = Promise<Data>.pending()
-        let urlSession = useSeedNodeURLSession ? seedNodeURLSession : snodeURLSession
+        let urlSession = useSeedNodeURLSession ? URLSession(configuration: ContentProxy.sessionCustomConfiguration(), delegate: seedNodeURLSessionDelegate, delegateQueue: nil) : URLSession(configuration: ContentProxy.sessionCustomConfiguration(), delegate: snodeURLSessionDelegate, delegateQueue: nil)
         let task = urlSession.dataTask(with: request) { data, response, error in
             guard let data = data, let response = response as? HTTPURLResponse else {
                 if let error = error {

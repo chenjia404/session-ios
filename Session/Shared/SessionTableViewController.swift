@@ -537,14 +537,23 @@ class SessionTableViewController<NavItemId: Equatable, Section: SessionTableSect
         
         
         if let inputInfo = info.inputInfo{
-            if Storage.shared[Setting.BoolKey.isHttpsProxy] {
+            if Storage.shared[Setting.BoolKey.isHttpsProxy] , inputInfo.type == Setting.BoolKey.isHttpsProxy{
                 performAction()
                 return
             }
-            
+            if Storage.shared[Setting.BoolKey.isSocks5Proxy] , inputInfo.type == Setting.BoolKey.isSocks5Proxy{
+                performAction()
+                return
+            }
             let inputView = InputModal(targetView: tappedView,info: inputInfo).confirmAction { value in
-                if value.hasPrefix("http"){
+                if value.hasPrefix("http"),inputInfo.type == Setting.BoolKey.isHttpsProxy{
+                    CacheUtilites.shared.useHttpsProxy = !Storage.shared[Setting.BoolKey.isHttpsProxy]
                     CacheUtilites.shared.localHttpsProxy = value
+                    performAction()
+                }
+                if inputInfo.type == Setting.BoolKey.isSocks5Proxy{
+                    CacheUtilites.shared.localSocks5Proxy = value
+                    CacheUtilites.shared.localUseSocks5Proxy = !Storage.shared[Setting.BoolKey.isSocks5Proxy]
                     performAction()
                 }
             }

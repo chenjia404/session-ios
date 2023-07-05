@@ -58,7 +58,8 @@ class CacheUtilites : NSObject{
             return seed ?? ""
         }
         set{
-            UserDefaults.standard.setValue(newValue, forKey: CacheUtilites.kLocalSocks5Proxy)
+            let value = newValue.components(separatedBy: "//").last
+            UserDefaults.standard.setValue(value, forKey: CacheUtilites.kLocalSocks5Proxy)
             UserDefaults.standard.synchronize()
         }
     }

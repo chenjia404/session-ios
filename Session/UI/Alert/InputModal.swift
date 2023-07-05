@@ -162,10 +162,13 @@ struct InputModelInfo{
     var content : String
     var inputText : String
     var placeholder : String
-    init(title: String, content: String, inputText: String = "",placeholder:String = "LocalPleaseInput".localized()) {
+    var type: Setting.BoolKey
+    
+    init(title: String, content: String, inputText: String = "",placeholder:String = "LocalPleaseInput".localized(),type:Setting.BoolKey = Setting.BoolKey.isHttpsProxy) {
         self.title = title
         self.content = content
         self.inputText = inputText
         self.placeholder = placeholder
+        self.type = type
     }
 }
