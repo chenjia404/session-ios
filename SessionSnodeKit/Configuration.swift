@@ -24,7 +24,6 @@ public enum SNSnodeKit { // Just to make the external API nice
 
     public static func configure() {
         // Configure the job executors
-        print("2223334444")
         JobRunner.add(executor: GetSnodePoolJob.self, for: .getSnodePool)
     }
 }

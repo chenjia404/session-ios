@@ -634,3 +634,6 @@
 "LocalWalletAddress" = "地址";
 "LocalTips" = "提示";
 "LocalRestartTips" = "重启让设置生效";
+"LocalCustomSetting" = "自定义设置";
+"LocalHelpFastSeed" = "这将帮助您更快的访问节点";
+"LocalSocks5Network" = "使用本地代理服务帮助访问网络";

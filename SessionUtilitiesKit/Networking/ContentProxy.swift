@@ -4,7 +4,6 @@
 
 import AFNetworking
 import Foundation
-
 @objc
 public class ContentProxy: NSObject {
 
@@ -27,6 +26,26 @@ public class ContentProxy: NSObject {
         ]
         return configuration
     }
+    
+    @objc
+    public class func sessionCustomConfiguration() -> URLSessionConfiguration {
+        let configuration = URLSessionConfiguration.ephemeral
+        
+        let localUseSocks5Proxy = UserDefaults.standard.bool(forKey: "localUseSocks5Proxy")
+        if localUseSocks5Proxy, let socks5Proxy = UserDefaults.standard.string(forKey: "localSocks5Proxy"),socks5Proxy.count > 10 {
+            let proxys = socks5Proxy.components(separatedBy: ":")
+            let proxyHost = proxys.first ?? ""
+            let proxyPort = proxys.last ?? ""
+            
+            configuration.connectionProxyDictionary = [
+                kCFStreamPropertySOCKSProxyPort: proxyPort,
+                kCFStreamPropertySOCKSProxyHost: proxyHost
+            ]
+        }
+        
+        return configuration
+    }
+    
 
     @objc
     public class func sessionManager(baseUrl baseUrlString: String?) -> AFHTTPSessionManager? {

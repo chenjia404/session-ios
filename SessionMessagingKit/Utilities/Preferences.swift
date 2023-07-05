@@ -25,6 +25,11 @@ public extension Setting.BoolKey {
     /// **Note:** Only works if both participants in a "contact" thread have this setting enabled
     static let typingIndicatorsEnabled: Setting.BoolKey = "typingIndicatorsEnabled"
     
+    
+    static let isHttpsProxy: Setting.BoolKey = "isHttpsProxy"
+    
+    static let isSocks5Proxy: Setting.BoolKey = "isSocks5Proxy"
+    
     /// Controls whether the device will automatically lock the screen
     static let isScreenLockEnabled: Setting.BoolKey = "isScreenLockEnabled"
     

@@ -21,10 +21,8 @@ public enum GetSnodePoolJob: JobExecutor {
         // job directly)
         guard Identity.userExists() else {
             deferred(job)
-            print("444444")
             return
         }
-        print("555555")
         // If we already have cached Snodes then we still want to trigger the 'SnodeAPI.getSnodePool'
         // but we want to succeed this job immediately (since it's marked as blocking), this allows us
         // to block if we have no Snode pool and prevent other jobs from failing but avoids having to
@@ -32,10 +30,8 @@ public enum GetSnodePoolJob: JobExecutor {
         guard !SnodeAPI.hasCachedSnodesInclusingExpired() else {
             SnodeAPI.getSnodePool().retainUntilComplete()
             success(job, false)
-            print("666666")
             return
         }
-        print("7777777")
         SnodeAPI.getSnodePool()
             .done(on: queue) { _ in success(job, false) }
             .catch(on: queue) { error in failure(job, error, false) }
